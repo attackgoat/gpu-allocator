@@ -1,8 +1,8 @@
 #![windows_subsystem = "windows"]
-
+//! Example showcasing [`winapi`] interop with [`gpu-allocator`] which is driven by the [`windows`] crate.
 use raw_window_handle::HasRawWindowHandle;
 
-use gpu_allocator::d3d12::{Allocator, AllocatorCreateDesc, Dx12DevicePtr};
+use gpu_allocator::d3d12::{Allocator, AllocatorCreateDesc, ToWindows};
 
 mod all_dxgi {
     pub use winapi::shared::{
@@ -352,8 +352,8 @@ fn main() {
             command_list.as_mut().unwrap()
         };
 
-        let mut allocator = Allocator::new(&AllocatorCreateDesc {
-            device: Dx12DevicePtr(<*mut ID3D12Device>::cast(device)),
+        let mut allocator = Allocator::new(AllocatorCreateDesc {
+            device: (device as *const ID3D12Device).as_windows().clone(),
             debug_settings: Default::default(),
         })
         .unwrap();

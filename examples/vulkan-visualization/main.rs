@@ -219,7 +219,7 @@ fn main() -> ash::prelude::VkResult<()> {
 
     // Setting up the allocator
     let mut allocator = Some(
-        Allocator::new(&AllocatorCreateDesc {
+        Allocator::new(AllocatorCreateDesc {
             instance: instance.clone(),
             device: device.clone(),
             physical_device: pdevice,

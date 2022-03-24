@@ -87,7 +87,7 @@ fn main() {
     };
 
     // Setting up the allocator
-    let mut allocator = Allocator::new(&AllocatorCreateDesc {
+    let mut allocator = Allocator::new(AllocatorCreateDesc {
         instance: instance.clone(),
         device: device.clone(),
         physical_device: pdevice,

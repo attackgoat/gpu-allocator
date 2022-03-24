@@ -462,7 +462,7 @@ impl fmt::Debug for Allocator {
 }
 
 impl Allocator {
-    pub fn new(desc: &AllocatorCreateDesc) -> Result<Self> {
+    pub fn new(desc: AllocatorCreateDesc) -> Result<Self> {
         if desc.physical_device == ash::vk::PhysicalDevice::null() {
             return Err(AllocationError::InvalidAllocatorCreateDesc(
                 "AllocatorCreateDesc field `physical_device` is null.".into(),
